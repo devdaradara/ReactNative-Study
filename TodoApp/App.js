@@ -1,20 +1,37 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {StyleSheet, KeyboardAvoidingView, Platform} from 'react-native';
+import DateHead from './components/DateHead';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import AddTodo from './components/AddTodo';
+import Empty from './components/Empty';
 
 const App = () => {
+  const today = new Date();
+  
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Welcome to your JavaScript React Native app!</Text>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView edges={[ 'bottom' ]} style={styles.block}>
+        <KeyboardAvoidingView
+          behavior={Platform.select({ ios: 'padding'})}
+          style={styles.avoid}
+        >
+          <DateHead date={today} />
+          <Empty />
+          <AddTodo />          
+        </KeyboardAvoidingView>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  block: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    backgroundColor: 'white'
   },
+  avoid: {
+    flex: 1
+  }
 });
 
 export default App;
