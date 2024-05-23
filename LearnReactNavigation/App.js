@@ -1,20 +1,24 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import MainScreen from './screens/MainScreen';
+import DetailScreen from './screens/DetailScreen';
 
-const App = () => {
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Welcome to your JavaScript React Native app!</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Main"
+          component={MainScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen name="Detail" component={DetailScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+}
 
 export default App;
