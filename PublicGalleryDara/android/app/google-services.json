@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "807248204992",
+    "project_id": "public-gallery-dara",
+    "storage_bucket": "public-gallery-dara.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:807248204992:android:44d06f47c01282fdb8c925",
+        "android_client_info": {
+          "package_name": "com.publicgallerydara"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLsGywMPbRFosc7JgHM3Uga0ozAQ_QIHE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
