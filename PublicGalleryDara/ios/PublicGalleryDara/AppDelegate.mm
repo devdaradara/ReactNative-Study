@@ -1,4 +1,3 @@
-#import <Firebas.h>
 #import "AppDelegate.h"
 
 #import <React/RCTBundleURLProvider.h>
@@ -7,13 +6,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  #ifdef FB_SONARKIT_ENABLED
-    InitializeFlipper(application);
-  #endif
+  self.moduleName = @"PublicGalleryDara";
+  // You can add your custom initial props in the dictionary below.
+  // They will be passed down to the ViewController used by React Native.
+  self.initialProps = @{};
 
-  if ([FIRApp defaultApp] == nil) {
-    [FIRApp configure];
-  }
+  return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

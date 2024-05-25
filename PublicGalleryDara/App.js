@@ -1,13 +1,20 @@
-import { NavigationContainer } from '@react-navigation/native'
-import React from 'react'
-import RootStack from './screens/RootStack'
+import React from 'react';
+import {SafeAreaView, StyleSheet, Text} from 'react-native';
 
-function App() {
+const App = () => {
   return (
-    <NavigationContainer>
-      <RootStack />
-    </NavigationContainer>
-  )
-}
+    <SafeAreaView style={styles.container}>
+      <Text>Welcome to your JavaScript React Native app!</Text>
+    </SafeAreaView>
+  );
+};
 
-export default App
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default App;

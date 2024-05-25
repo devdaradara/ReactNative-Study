@@ -5,10 +5,7 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-platform :ios, '14.0'  # iOS 버전을 14.0으로 설정
-
-use_modular_headers!
-
+platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
 linkage = ENV['USE_FRAMEWORKS']
@@ -26,23 +23,13 @@ target 'PublicGalleryDara' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
-  pod 'RNFBAuth', :path => '../node_modules/@react-native-firebase/auth'
-  pod 'RNFBFirestore', :path => '../node_modules/@react-native-firebase/firestore'
-  pod 'RNFBStorage', :path => '../node_modules/@react-native-firebase/storage'
-
   target 'PublicGalleryDaraTests' do
     inherit! :complete
     # Pods for testing
   end
 
   post_install do |installer|
-    installer.pods_project.targets.each do |target|
-      target.build_configurations.each do |config|
-        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '14.0'
-      end
-    end
-
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
       config[:reactNativePath],
