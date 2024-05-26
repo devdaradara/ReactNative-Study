@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "942269129249",
+    "project_id": "public-gallery-daradara",
+    "storage_bucket": "public-gallery-daradara.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:942269129249:android:a2484e4e5b4ca72629b960",
+        "android_client_info": {
+          "package_name": "com.publicgallerydaradara"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8Nh7qWA-JI_be82lZHUEihB-YAis5Ciw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
