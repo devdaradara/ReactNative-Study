@@ -16,6 +16,7 @@ end
 
 target 'PublicGalleryDaradara' do
   config = use_native_modules!
+  use_frameworks!
   pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
 
   pod 'Firebase', :modular_headers => true
@@ -26,6 +27,8 @@ target 'PublicGalleryDaradara' do
   pod 'FirebaseAppCheckInterop', :modular_headers => true
   pod 'FirebaseAuthInterop', :modular_headers => true
   pod 'FirebaseFirestoreInternal', :modular_headers => true
+  pod 'FirebaseFirestore', :modular_headers => true
+  pod 'FirebaseStorage', :modular_headers => true
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -46,5 +49,14 @@ target 'PublicGalleryDaradara' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+
+    # Ensure Swift is correctly configured
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '5.0'
+        config.build_settings['HEADER_SEARCH_PATHS'] ||= '$(inherited)'
+        config.build_settings['HEADER_SEARCH_PATHS'] << ' $(PODS_ROOT)/Headers/Public $(PODS_ROOT)/Headers/Public/Firebase $(PODS_ROOT)/Headers/Public/FirebaseStorage'
+      end
+    end
   end
 end
