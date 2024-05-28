@@ -1,20 +1,35 @@
-import { useDispatch } from 'react-redux';
-import { useMemo } from 'react';
-import { bindActionCreators } from '@reduxjs/toolkit';
-import { add, remove, toggle } from '../slices/todos';
+import { useMemo } from "react";
+import { useSetRecoilState, useRecoilValue, useRecoilCallback } from "recoil";
+import { nextTodoId, todosState } from "../atoms/todos";
 
 export default function useTodosActions() {
-  const dispatch = useDispatch();
+  const set = useSetRecoilState(todosState);
+  const add = useRecoilCallback(
+    ({snapshat}) => async (text: string) => {
+      const nextId = await snapshat.getPromise(nextTodoId);
+      set((prevState) =>
+        prevState.concat({
+          id: nextId,
+          text,
+          done: false,
+        }),
+      );
+    },
+    [set],
+  )
+  
   return useMemo(
-    () => 
-      bindActionCreators(
-        {
-          add,
-          remove,
-          toggle,
-        },
-        dispatch
-      ),
-      [dispatch],
-  );
+    () => ({
+      add,
+      remove: (id: number) =>
+        set((prevState) => prevState.filter((todo) => todo.id !== id)),
+      toggle: (id: number) =>
+        set((prevState) =>
+          prevState.map((todo) =>
+            todo.id === id ? { ...todo, done: !todo.done } : todo
+          )
+        ),
+    }),
+    [add, set],
+  )
 }
